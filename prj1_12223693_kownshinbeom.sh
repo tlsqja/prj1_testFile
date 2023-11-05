@@ -29,7 +29,8 @@ do
 
 	case $order in 
 		1) 
-			echo -e -n "\nPlease enter 'movie id'(1~1682):"
+  			echo
+			echo -n "Please enter 'movie id'(1~1682):"
 		        read movieId
 			echo 
 			echo $movieId | awk -F"|" -v id="$movieId" '$1 == id { print }' "$ITEM_File"
@@ -37,7 +38,8 @@ do
 
 			;;
 		2) 
-			echo -e -n "\nDo you want to get the data of 'action' genre movies from 'u.item'? (y/n):"
+  			echo
+			echo -n "Do you want to get the data of 'action' genre movies from 'u.item'? (y/n):"
 			read ans
 			echo 
 			if [ "$ans" = "y" ]; then
@@ -47,15 +49,18 @@ do
 
 			;;
 		3)
-			echo -e -n "\nPlease enter the 'movie id' (1~1682):"
+  			echo
+			echo -n "Please enter the 'movie id' (1~1682):"
 			read movieId
 			echo 
 			rating=$(awk -F "\t" -v id="$movieId" '$2 == id {sum += $3; n++} END {printf "%.5f", sum / n}' "$DATA_File")
-			echo -e "average rating of $movieId: $rating\n"
+			echo "average rating of $movieId: $rating"
+   			echo
 
 			;;
 		4)
-			echo -e -n  "\nDo you want to delete the 'IMDb URL' from 'u.item'?(y/n):"
+  			echo
+			echo -n  "Do you want to delete the 'IMDb URL' from 'u.item'?(y/n):"
 			read ans
 			echo 
 			if [ "$ans" = "y" ]; then
@@ -65,7 +70,8 @@ do
 
 			;;
 		5) 
-			echo -e -n "\nDo you want to get the data about users from 'u.user'?(y/n):"
+  			echo
+			echo -n "Do you want to get the data about users from 'u.user'?(y/n):"
 			read ans
 			echo
 			if [ "$ans" = "y" ]; then 
@@ -78,7 +84,8 @@ do
 
 			;;
 		6)		
-			echo -e -n  "\nDo you want to Modify teh format of 'release data' in 'u.item'?(y/n):"
+  			echo
+			echo -n  "Do you want to Modify teh format of 'release data' in 'u.item'?(y/n):"
 			read ans
 			echo 
 			if [ "$ans" = "y" ]; then
@@ -101,25 +108,28 @@ do
 
 			;;
 		7) 
-			echo -e -n "\nPlease enter the 'user id' (1~943):"
+  			echo
+			echo -n "Please enter the 'user id' (1~943):"
 			read userId
 			echo
 			
 			rating=$(awk -F "\t" -v id="$userId" '$1 == id { print $2 }' "$DATA_File" | sort -n | tr "\n" "|")
 			movieIds=$(awk -F "\t" -v id="$userId" '$1 == id { print $2 }' "$DATA_File" | sort -n | tr "\n" " ")
 
-			echo -e "$rating\n"
+			echo "$rating"
+   			echo
 
 			for movieId in $movieIds; do 
 				movieTitle=$(awk -F "|" -v id="$movieId" '$1 == id { print $2 }' "$ITEM_File")
-				echo -e "$movieId|$movieTitle"
+				echo "$movieId|$movieTitle"
 			done | head -n 10
 
 			echo
 
 			;;
 		8)
-			echo -e -n "\nDo you want to get the average 'rating' of movies rated by users with 'age' between 20 and 29 and 'occupation' as 'programmer'?(y/n):"
+  			echo
+			echo -n "Do you want to get the average 'rating' of movies rated by users with 'age' between 20 and 29 and 'occupation' as 'programmer'?(y/n):"
 			read ans
 			echo
 
@@ -143,9 +153,11 @@ do
 
 				rm info.txt				
 			fi 
+   
 			;;
 		9)
-			echo -e "Bye!\n"
+			echo "Bye!"
+   			echo
 			exit 0
 			;;
 
